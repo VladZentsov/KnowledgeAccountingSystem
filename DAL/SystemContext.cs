@@ -16,10 +16,7 @@ namespace DAL
         public DbSet<Report> Reports { get; set; }
         public DbSet<KnowledgeForm> KnowledgeForms { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
+
 
     }
 }

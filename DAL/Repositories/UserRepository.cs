@@ -18,8 +18,49 @@ namespace DAL.Repositories
         {
             _Context = Context;
         }
+        public async Task CreateUserRolesAsync(User user,string role)
+        {
+            var roleStore = new RoleStore<IdentityRole>();
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            if (!roleManager.RoleExists(role))
+            {
+                var identityResult = await roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = role
+                });
+            }
+            var identityUser = new IdentityUser()
+            {
+                UserName = user.Name,
+            };
+            IdentityResult result = await userManager.CreateAsync(identityUser, user.Pass);
 
-        public async Task<User> CreateAsync(User user)
+            await userManager.AddToRoleAsync(identityUser.Id, role);
+
+        }
+        public async Task<User> CreateUserAsync(User user)
+        {
+
+
+            _Context.Users.Add(user);
+
+            await _Context.SaveChangesAsync();
+
+            await CreateUserRolesAsync(user, "User");
+
+            return user;
+        }
+        public async Task<User> CreateManagerAsync(User user)
+        {
+            _Context.Users.Add(user);
+
+            await _Context.SaveChangesAsync();
+
+            return user;
+        }
+        public async Task<User> CreateAdminAsync(User user)
         {
             _Context.Users.Add(user);
 
@@ -60,26 +101,6 @@ namespace DAL.Repositories
             await _Context.SaveChangesAsync();
 
             return item != null;
-        }
-        public async Task CreateUserRolesAsync()
-        {
-            var roleStore = new RoleStore<IdentityRole>();
-            var roleManager = new RoleManager<IdentityRole>(roleStore);
-
-            var identityResult = await roleManager.CreateAsync(new IdentityRole
-            {
-                Name = "Manager"
-            });
-            var identityResult2 = await roleManager.CreateAsync(new IdentityRole
-            {
-                Name = "User"
-            });
-
-            var userStore = new UserStore<IdentityUser>();
-            var userManager = new UserManager<IdentityUser>(userStore);
-            var user = await userManager.FindAsync("TestUserName", "TestPassword");
-
-            await userManager.AddToRoleAsync(user.Id, "Manager");
         }
     }
 }

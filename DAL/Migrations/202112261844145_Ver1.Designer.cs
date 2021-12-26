@@ -7,13 +7,13 @@ namespace DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AccSystemDB : IMigrationMetadata
+    public sealed partial class Ver1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AccSystemDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Ver1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202112242127235_AccSystemDB"; }
+            get { return "202112261844145_Ver1"; }
         }
         
         string IMigrationMetadata.Source

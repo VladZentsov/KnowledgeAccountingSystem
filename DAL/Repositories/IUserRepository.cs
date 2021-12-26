@@ -9,11 +9,12 @@ namespace DAL.Repositories
 {
     public interface IUserRepository
     {
-        Task<User> CreateAsync(User user);
+        Task<User> CreateUserAsync(User user);
+        Task<User> CreateManagerAsync(User user);
+        Task<User> CreateAdminAsync(User user);
         Task<IEnumerable<User>> GetAllAsync(bool isDeleted = false);
         Task<User> GetByIdAsync(int id);
         Task<bool> UpdateAsync(User user);
         Task<bool> DeleteAsync(int id);
-        Task CreateUserRolesAsync();
     }
 }

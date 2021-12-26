@@ -19,7 +19,7 @@ namespace DAL.Models
         public int DataScienceGrade { get; set; }
         public string WebDesc { get; set; }
         public string MobDevDesc { get; set; }
-        public int DataScienceDesc { get; set; }
+        public string DataScienceDesc { get; set; }
 
     }
 }

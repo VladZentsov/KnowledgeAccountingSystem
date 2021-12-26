@@ -33,27 +33,6 @@ namespace KnowledgeAccountingSystem.Controllers
             return View(await _usersService.GetByIdAsync(id));
         }
 
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
-        [HttpPost]
-        public async Task<ActionResult> Create(User user)
-        {
-            try
-            {
-                await _usersService.CreateAsync(user);
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Users/Edit/5
         public ActionResult Edit(int id)
@@ -99,36 +78,7 @@ namespace KnowledgeAccountingSystem.Controllers
             }
         }
 
-        public ActionResult Login()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return View();
-            }
-
-            return Redirect("Index");
-        }
-         
-        [HttpPost]
-        public ActionResult Login(LoginInfo loginInfo)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Redirect("Login");
-            }
-
-            var userStore = new UserStore<IdentityUser>();
-            var manager = new UserManager<IdentityUser>(userStore);
-            var authenticationManager = HttpContext.GetOwinContext().Authentication;
-            var user = manager.Find(loginInfo.Username, loginInfo.Password);
-
-            var userIdentity = manager.CreateIdentity(user,
-                DefaultAuthenticationTypes.ApplicationCookie);
-
-            authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
-
-            return Redirect("Index");
-        }
+       
 
         [HttpGet]
         public ActionResult SignOut()

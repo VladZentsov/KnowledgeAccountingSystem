@@ -58,9 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Roles.cs" />
-    <Compile Include="Migrations\202112242127235_AccSystemDB.cs" />
-    <Compile Include="Migrations\202112242127235_AccSystemDB.designer.cs">
-      <DependentUpon>202112242127235_AccSystemDB.cs</DependentUpon>
+    <Compile Include="Migrations\202112261337595_AccSysDB.cs" />
+    <Compile Include="Migrations\202112261337595_AccSysDB.designer.cs">
+      <DependentUpon>202112261337595_AccSysDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112261844145_Ver1.cs" />
+    <Compile Include="Migrations\202112261844145_Ver1.designer.cs">
+      <DependentUpon>202112261844145_Ver1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\KnowledgeForm.cs" />
@@ -84,8 +88,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112242127235_AccSystemDB.resx">
-      <DependentUpon>202112242127235_AccSystemDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112261337595_AccSysDB.resx">
+      <DependentUpon>202112261337595_AccSysDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112261844145_Ver1.resx">
+      <DependentUpon>202112261844145_Ver1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -29,15 +29,11 @@ namespace DAL.Models
         [MinLength(3)]
         [MaxLength(100)]
         public string Pass { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        [Key, Column(Order = 1)]
-        [ForeignKey(nameof(KnowledgeForm))]
-        public int KnowledgeFormId { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public int? KnowledgeFormId { get; set; }
         public virtual KnowledgeForm KnowledgeForm { get; set; }
-        Role Role { get; set; }
-        [Key, Column(Order = 2)]
-        [ForeignKey(nameof(Project))]
-        public int ProjectId { get; set; }
+        public Role Role { get; set; }
+        public int? ProjectId { get; set; }
         public virtual Project Project { get; set; }
     }
 }

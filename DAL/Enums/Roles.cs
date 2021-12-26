@@ -10,6 +10,7 @@ namespace DAL.Enums
     {
         Junior,
         Middle,
-        Senior
+        Senior,
+        NoRole
     }
 }

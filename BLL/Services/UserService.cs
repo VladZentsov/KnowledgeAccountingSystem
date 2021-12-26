@@ -18,9 +18,17 @@ namespace BLL.Services
             _usersRepository = usersRepository;
         }
 
-        public async Task<User> CreateAsync(User user)
+        public async Task<User> CreateUserAsync(User user)
         {
-            return await _usersRepository.CreateAsync(user);
+            return await _usersRepository.CreateUserAsync(user);
+        }
+        public async Task<User> CreateManagerAsync(User user)
+        {
+            return await _usersRepository.CreateManagerAsync(user);
+        }
+        public async Task<User> CreateAdminAsync(User user)
+        {
+            return await _usersRepository.CreateAdminAsync(user);
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -38,8 +46,25 @@ namespace BLL.Services
             return await _usersRepository.GetByIdAsync(id);
         }
 
-        public async Task<bool> UpdateAsync(User user)
+        public async Task<bool> UpdateAsync(User newuser)
         {
+            var user = await GetByIdAsync(newuser.UserId);
+            if (user.ProjectId != null)
+                user.ProjectId = newuser.ProjectId;
+            if (user.KnowledgeFormId != null)
+                user.KnowledgeFormId = newuser.KnowledgeFormId;
+            if (user.Pass != null)
+                user.Pass = newuser.Pass;
+            if (user.Login != null)
+                user.Login = newuser.Login;
+            user.Role = newuser.Role;
+            return await _usersRepository.UpdateAsync(user);
+        }
+
+        public async Task<bool> UpdateRoleAsync(int id, Role role)
+        {
+            var user = await GetByIdAsync(id);
+            user.Role = role;
             return await _usersRepository.UpdateAsync(user);
         }
     }
