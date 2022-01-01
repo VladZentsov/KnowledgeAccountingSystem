@@ -1,4 +1,6 @@
 ﻿using DAL.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using DAL.Enums;
 using DAL.Repositories;
 using System;
@@ -67,5 +69,23 @@ namespace BLL.Services
             user.Role = role;
             return await _usersRepository.UpdateAsync(user);
         }
+
+        public async Task<string> GetRoleAsync(User user)
+        {
+           return await _usersRepository.GetRoleAsync(user);
+
+        }
+
+        public async Task<List<User>> GetUsersWithRoleAsync(string role)
+        {
+            List<User> resultUsers = new List<User>();
+            foreach (var user in await _usersRepository.GetAllAsync())
+            {
+                if(await _usersRepository.GetRoleAsync(user) == role)
+                    resultUsers.Add(user);
+            }
+            return resultUsers;
+        }
+
     }
 }

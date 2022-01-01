@@ -82,6 +82,7 @@
     <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SystemContext.cs" />
+    <Compile Include="UoW\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

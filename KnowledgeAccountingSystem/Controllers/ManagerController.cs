@@ -31,11 +31,15 @@ namespace KnowledgeAccountingSystem.Controllers
         }
         public async Task<ActionResult> UsersView()
         {
-            return View(await _usersService.GetAllAsync());
+            return View(await _usersService.GetUsersWithRoleAsync("User"));
         }
         // GET: Users/Create
         //[Authorize(Roles = "Manager")]
         public ActionResult CreateAdmin()
+        {
+            return View();
+        }
+        public ActionResult CreateProject()
         {
             return View();
         }
@@ -57,6 +61,9 @@ namespace KnowledgeAccountingSystem.Controllers
         }
         public async Task<ActionResult> AttachToProject(int id)
         {
+            List<Project> projects = (List<Project>)await _projectService.GetAllAsync();
+            SelectList SelectProjects = new SelectList(projects, "ProjectId", "ProjectName");
+            ViewBag.Projects = projects;
             return View(await _usersService.GetByIdAsync(id));
         }
         // POST: Goods/Edit/5
@@ -66,6 +73,7 @@ namespace KnowledgeAccountingSystem.Controllers
         {
             try
             {
+
                 user.UserId = id;
                 await _usersService.UpdateAsync(user);
                 // TODO: Add update logic here
@@ -76,6 +84,17 @@ namespace KnowledgeAccountingSystem.Controllers
             {
                 return View();
             }
+        }
+        public async Task<ActionResult> ProjectsView()
+        {
+            return View(await _projectService.GetAllAsync());
+        }
+        public async Task<ActionResult> ProjectDetails(int id)
+        {
+            List<Project> projects = (List<Project>)await _projectService.GetAllAsync();
+            SelectList SelectProjects = new SelectList(projects, "ProjectId", "ProjectName");
+            ViewBag.Projects = SelectProjects;
+            return View(await _usersService.GetByIdAsync(id));
         }
 
     }

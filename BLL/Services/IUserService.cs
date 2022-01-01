@@ -18,5 +18,7 @@ namespace BLL.Services
         Task<bool> UpdateAsync(User user);
         Task<bool> UpdateRoleAsync(int id, Role role);
         Task<bool> DeleteAsync(int id);
+        Task<string> GetRoleAsync(User user);
+        Task<List<User>> GetUsersWithRoleAsync(string role);
     }
 }

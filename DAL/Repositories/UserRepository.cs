@@ -58,6 +58,8 @@ namespace DAL.Repositories
 
             await _Context.SaveChangesAsync();
 
+            await CreateUserRolesAsync(user, "Manager");
+
             return user;
         }
         public async Task<User> CreateAdminAsync(User user)
@@ -65,6 +67,8 @@ namespace DAL.Repositories
             _Context.Users.Add(user);
 
             await _Context.SaveChangesAsync();
+
+            await CreateUserRolesAsync(user, "Admin");
 
             return user;
         }
@@ -101,6 +105,14 @@ namespace DAL.Repositories
             await _Context.SaveChangesAsync();
 
             return item != null;
+        }
+        public async Task<string> GetRoleAsync(User user)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            var IdentityUser = await userManager.FindAsync(user.Name, user.Pass);
+            string roleName = userManager.GetRoles(IdentityUser.Id).FirstOrDefault();
+            return roleName;
         }
     }
 }

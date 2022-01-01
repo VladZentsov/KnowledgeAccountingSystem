@@ -238,6 +238,8 @@
     <Content Include="Views\Admin\CreateAdmin.cshtml" />
     <Content Include="Views\Admin\UsersView.cshtml" />
     <Content Include="Views\Manager\AttachToProject.cshtml" />
+    <Content Include="Views\Manager\ProjectsView.cshtml" />
+    <Content Include="Views\Manager\ProjectDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
